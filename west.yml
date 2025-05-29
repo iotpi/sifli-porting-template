@@ -1,0 +1,21 @@
+manifest:
+  version: "1.2"
+  remotes:
+    - name: zephyrproject-rtos
+      url-base: https://github.com/zephyrproject-rtos
+
+  defaults:
+    remote: zephyrproject-rtos
+
+  projects:
+    - name: zephyr
+      revision: v4.1.0
+      clone-depth: 1
+      import:
+        name-allowlist:
+          - cmsis
+          - cmsis-dsp
+          - cmsis-nn
+          - picolibc
+  self:
+    path: .
