@@ -30,5 +30,5 @@ west zephyr-export
 west packages pip --install
 
 # install zephyr sdk if you didn't yet
-west sdk install
+west sdk install -t arm-zephyr-eabi
 ```
