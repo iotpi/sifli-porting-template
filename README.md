@@ -32,3 +32,16 @@ west packages pip --install
 # install zephyr sdk if you didn't yet
 west sdk install -t arm-zephyr-eabi
 ```
+
+clone zephyr porting repos:
+
+```shell
+git clone git@github.com:iotpi/sifli_zephyr.git
+git clone git@github.com:iotpi/hal_sifli.git
+```
+
+## Build
+
+```shell
+west build -p always -b em-lb525 zephyr/samples/hello_world/
+```
