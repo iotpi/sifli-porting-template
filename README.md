@@ -45,5 +45,9 @@ git clone git@github.com:iotpi/hal_sifli.git
 ## Build
 
 ```shell
+# because following 'export' uses $PWD, so it should run under
+# 'workspace' directory, or you need to change $PWD to your
+# real root
+export ZEPHYR_EXTRA_MODULES="$PWD/sifli_zephyr;$PWD/hal_sifli"
 west build -p always -b em-lb525 zephyr/samples/hello_world/
 ```
