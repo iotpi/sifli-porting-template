@@ -24,7 +24,7 @@ pip install west
 
 ```shell
 git clone https://github.com/iotpi/sifli-porting-template.git
-west -l sifli-porting-template
+west init -l sifli-porting-template
 west update
 west zephyr-export
 west packages pip --install
