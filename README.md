@@ -56,4 +56,11 @@ west build -p always -b em-lb525 zephyr/samples/hello_world/
 
 ```shell
 probe-rs info --chip SF32LB58   --protocol swd --speed 4000
+RUST_LOG="probe_rs::architecture::arm=debug,probe_rs::flashing::erase=debug" cargo run --  erase --chip SF32LB58   --protocol swd --speed 4000
+
+JLinkExe -Device SF32LB58X -if swd -speed 4000
+JLink> erase 0x18000000 0x18001000
+
+JLinkGDBServer -Device SF32LB58X -if swd -speed 4000
+
 ```
