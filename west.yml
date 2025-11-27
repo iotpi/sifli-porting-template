@@ -9,11 +9,10 @@ manifest:
 
   projects:
     - name: zephyr
-      revision: v4.1.0
-      clone-depth: 1
+      revision: v4.3.0
       import:
         name-allowlist:
-          - cmsis
+          - cmsis_6
           - cmsis-dsp
           - cmsis-nn
           - picolibc
