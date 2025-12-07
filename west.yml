@@ -16,5 +16,6 @@ manifest:
           - cmsis-dsp
           - cmsis-nn
           - picolibc
+          - hal_sifli
   self:
     path: .
