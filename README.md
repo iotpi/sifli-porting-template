@@ -77,6 +77,7 @@ git clone git@github.com:iotpi/hal_sifli.git
 # real root
 export ZEPHYR_EXTRA_MODULES="$PWD/sifli_zephyr;$PWD/hal_sifli"
 west build -p always -b sf32lb58_devkit/sf32lb586/hcpu zephyr/samples/hello_world/
+west build -p always -b sf32lb58_devkit/sf32lb586/hcpu zephyr/samples/hello_world/ -- -DEXTRA_CONF_FILE=debug.conf
 ```
 
 ## Debug
