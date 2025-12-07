@@ -17,6 +17,7 @@ cd workspace
     Please refer to official [zephyr document](https://docs.zephyrproject.org/latest/develop/getting_started/index.html) for detailed installation instructions
 
 ```shell
+# gdb-py inside zephyr-sdk requires python 3.10, so need to setup python3.10 first
 python -m venv .venv
 . .venv/bin/activate
 pip install west
@@ -31,8 +32,34 @@ west update
 west zephyr-export
 west packages pip --install
 
+pip install -r zephyr/scripts/requirements.txt
+
 # install zephyr sdk if you didn't yet
 west sdk install -t arm-zephyr-eabi
+
+# To use PyCortexMDebug
+git clone https://github.com/bnahill/PyCortexMDebug -b switch-to-cmsis_svd
+pip install cmsis_svd
+mkdir svd
+cp PATH_TO_SIFLI_SDK/tools/svd_external/... to svd
+setup .gdbinit and gdb.py as following
+```
+
+```.gdbinit
+source gdb.py
+
+source PyCortexMDebug/scripts/gdb.py
+svd_load svd/SF32LB58x.svd
+```
+
+``` python
+script_path = Path(os.path.abspath(os.path.expanduser(__file__)))
+root_path = script_path.parents[0]
+venv_path = root_path / 'venv/lib/python3.10/site-packages'
+if venv_path.is_dir():
+    sys.path.append(str(venv_path))
+else:
+    print("failed to add venv_path: ", venv_path)
 ```
 
 clone zephyr porting repos:
@@ -58,9 +85,23 @@ west build -p always -b sf32lb58_devkit/sf32lb586/hcpu zephyr/samples/hello_worl
 probe-rs info --chip SF32LB58   --protocol swd --speed 4000
 RUST_LOG="probe_rs::architecture::arm=debug,probe_rs::flashing::erase=debug" cargo run --  erase --chip SF32LB58   --protocol swd --speed 4000
 
+cargo run -- download --chip SF32LB58 --base-address 0x1C020000 --binary-format bin bootloader.bin
+cargo run -- download --chip SF32LB58 --base-address 0x18000000 --binary-format bin main.bin
+
 JLinkExe -Device SF32LB58X -if swd -speed 4000
 JLink> erase 0x18000000 0x18001000
 
 JLinkGDBServer -Device SF32LB58X -if swd -speed 4000
 
+```
+
+## Access Debug Port, Access Port
+
+```shell
+# DP SELECT = 0x00000070
+# AP register IDR
+mon readapex 0x00000070 0xfc
+
+# DPIDR
+mon readdp 0
 ```
