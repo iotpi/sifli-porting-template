@@ -106,3 +106,15 @@ mon readapex 0x00000070 0xfc
 # DPIDR
 mon readdp 0
 ```
+
+## Build Doc
+
+```shell
+python -m venv --prompt doc venv-docs
+. venv-docs/bin/activate
+pip install west
+pip install -r zephyr/doc/requirements.txt
+pip install jsonschema tabulate
+cd zephyr/doc
+make html-fast HW_FEATURES_VENDOR_FILTER=sifli
+```
