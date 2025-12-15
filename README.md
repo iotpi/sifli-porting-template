@@ -119,9 +119,12 @@ cd zephyr/doc
 make html-fast HW_FEATURES_VENDOR_FILTER=sifli
 ```
 
-## Check Compilance
+## Zephyr formatting tools and checking compilance
 ```shell
 python zephyr/scripts/ci/check_compilance.py
+
+# format dts
+npx --prefix ../../../scripts/ci dts-linter --formatFixAll
 ```
 
 ## Emacs Magit
