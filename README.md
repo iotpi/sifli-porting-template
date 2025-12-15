@@ -118,3 +118,17 @@ pip install jsonschema tabulate
 cd zephyr/doc
 make html-fast HW_FEATURES_VENDOR_FILTER=sifli
 ```
+
+## Check Compilance
+```shell
+python zephyr/scripts/ci/check_compilance.py
+```
+
+## Emacs Magit
+
+Added sign-off:
+
+    Show commits
+    (press) r(eword) w( reword a commit)
+    C-c TAB (show options)
+    s (sign-off)
